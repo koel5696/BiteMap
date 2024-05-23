@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="/css/login.css" rel="stylesheet">
+</head>
+<body>
+<div id="spinner" class="show">
+</div>
+
+<a href="#" class="back-to-top btn btn-lg-square border-secondary">
+    <i class="fas fa-arrow-up"></i>
+</a>
+
+<div class="login-container">
+    <div class="login-card">
+        <h2 class="login-title">로그인</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">ID</label>
+                <input type="text" id="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">비밀번호</label>
+                <input type="password" id="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">로그인</button>
+            <a href="member/register" class="btn btn-secondary">회원가입</a>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var spinner = document.getElementById('spinner');
+        spinner.classList.remove('show'); // Hide the spinner when the page is loaded
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        // Custom validation
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+
+        if (!username || !password) {
+            alert('Please fill in all required fields.');
+            event.preventDefault(); // Prevent form submission
+        }
+    });
+</script>
+</body>
+</html>
