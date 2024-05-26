@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link href="/css/login.css" rel="stylesheet">
+    <style>
+        .alert-danger {
+            color: red;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<div id="spinner" class="show">
-</div>
+<div id="spinner" class="show"></div>
 
 <a href="#" class="back-to-top btn btn-lg-square border-secondary">
     <i class="fas fa-arrow-up"></i>
@@ -17,14 +22,17 @@
 <div class="login-container">
     <div class="login-card">
         <h2 class="login-title">로그인</h2>
-        <form id="loginForm">
+        <form th:action="@{/member/login}" method="post" id="loginForm">
+            <div th:if="${param.error}" class="alert alert-danger" id="error-message">
+                ID 혹은 비밀번호를 확인해주세요.
+            </div>
             <div class="form-group">
                 <label for="username">ID</label>
-                <input type="text" id="username" class="form-control" required>
+                <input type="text" id="username" name="username" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="password">비밀번호</label>
-                <input type="password" id="password" class="form-control" required>
+                <input type="password" id="password" name="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary">로그인</button>
             <a href="member/register" class="btn btn-secondary">회원가입</a>
@@ -36,16 +44,16 @@
     document.addEventListener('DOMContentLoaded', function() {
         var spinner = document.getElementById('spinner');
         spinner.classList.remove('show'); // Hide the spinner when the page is loaded
-    });
 
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        // Custom validation
-        var username = document.getElementById('username').value;
-        var password = document.getElementById('password').value;
-
-        if (!username || !password) {
-            alert('Please fill in all required fields.');
-            event.preventDefault(); // Prevent form submission
+        // Show error message if login failed
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('error')) {
+            var errorMessage = document.getElementById('error-message');
+            if (errorMessage) {
+                errorMessage.style.display = 'block';
+            } else {
+                console.error("Error message element not found.");
+            }
         }
     });
 </script>

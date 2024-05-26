@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Service
 public class MemberService {
@@ -19,11 +17,12 @@ public class MemberService {
         Member member = new Member();
         member.setUsername(username);
         member.setEmail(email);
+        // 비밀번호를 인코딩하여 저장
         member.setPassword(passwordEncoder.encode(password));
         this.memberRepository.save(member);
         return member;
-
     }
+
     public boolean isUsernameTaken(String username) {
         return memberRepository.existsByUsername(username);
     }
@@ -36,4 +35,3 @@ public class MemberService {
         return memberRepository.save(member);
     }
 }
-

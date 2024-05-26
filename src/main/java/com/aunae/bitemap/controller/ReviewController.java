@@ -4,6 +4,7 @@ import com.aunae.bitemap.DTO.ReviewDTO;
 import com.aunae.bitemap.entity.Review;
 import com.aunae.bitemap.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
